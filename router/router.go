@@ -1,18 +1,25 @@
 package router
 
 import (
-    "net/http"
-    "github.com/gorilla/mux"
-    "github.com/yourorg/claude-test/handler"
+	"net/http"
+
+	"github.com/gorilla/mux"
+	"github.com/mmontes11/opencode-test/handler"
 )
 
 // NewRouter creates a new HTTP router with example routes.
 func NewRouter() http.Handler {
-    r := mux.NewRouter()
+	r := mux.NewRouter()
 
-    // Simple health check endpoint
-    r.HandleFunc("/health", handler.HealthCheck).Methods("GET")
+	// Simple health check endpoint
+	r.HandleFunc("/health", handler.HealthCheck).Methods("GET")
 
-    // Add more routes here as needed
-    return r
+	// CRUD routes for items
+	r.HandleFunc("/items", handler.CreateItemHandler).Methods("POST")
+	r.HandleFunc("/items", handler.ListItemHandler).Methods("GET")
+	r.HandleFunc("/items/{id}", handler.GetItemHandler).Methods("GET")
+	r.HandleFunc("/items/{id}", handler.UpdateItemHandler).Methods("PUT")
+	r.HandleFunc("/items/{id}", handler.DeleteItemHandler).Methods("DELETE")
+
+	return r
 }
