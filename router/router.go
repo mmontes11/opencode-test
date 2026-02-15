@@ -14,12 +14,17 @@ func NewRouter() http.Handler {
 	// Simple health check endpoint
 	r.HandleFunc("/health", handler.HealthCheck).Methods("GET")
 
-	// CRUD routes for items
-	r.HandleFunc("/items", handler.CreateItemHandler).Methods("POST")
-	r.HandleFunc("/items", handler.ListItemHandler).Methods("GET")
-	r.HandleFunc("/items/{id}", handler.GetItemHandler).Methods("GET")
-	r.HandleFunc("/items/{id}", handler.UpdateItemHandler).Methods("PUT")
-	r.HandleFunc("/items/{id}", handler.DeleteItemHandler).Methods("DELETE")
+	// Collection routes
+	r.HandleFunc("/collections", handler.CreateCollectionHandler).Methods("POST")
+	r.HandleFunc("/collections", handler.ListCollectionHandler).Methods("GET")
+	r.HandleFunc("/collections/{id}", handler.GetCollectionHandler).Methods("GET")
+	r.HandleFunc("/collections/{id}", handler.UpdateCollectionHandler).Methods("PUT")
+	r.HandleFunc("/collections/{id}", handler.DeleteCollectionHandler).Methods("DELETE")
+
+	// Collection item routes
+	r.HandleFunc("/collections/{id}/items", handler.AddItemToCollectionHandler).Methods("POST")
+	r.HandleFunc("/collections/{id}/items", handler.ListItemsInCollectionHandler).Methods("GET")
+	r.HandleFunc("/collections/{id}/items/{item_id}", handler.RemoveItemFromCollectionHandler).Methods("DELETE")
 
 	return r
 }
