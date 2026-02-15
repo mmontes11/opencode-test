@@ -8,6 +8,7 @@ The project was generated using [Opencode](https://github.com/anomalyco/opencode
 ### Runtime Environment
 
 NVIDIA RTX PRO Blackwell 4000 SFF 24GB VRAM
+
 gpt-oss:20b and 128K context window 
 
 ```
